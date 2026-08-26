@@ -6,6 +6,7 @@ import com.example.mvcbegines.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,5 +30,14 @@ public class ReviewService {
     public Review getReviewById(Long id){
         return repository.findById(id).orElseThrow(() ->
                 new ReviewNotFoundException("There is no review with this id " + id));
+    }
+
+    public Review createReview(Review review){
+        if(review.getRating() < 1 || review.getRating() > 5){
+            throw new IllegalArgumentException("Rating can not be less then 1 and bigger then 5");
+        }
+        review.setCreatedAt(LocalDateTime.now());
+        repository.save(review);
+        return review;
     }
 }
