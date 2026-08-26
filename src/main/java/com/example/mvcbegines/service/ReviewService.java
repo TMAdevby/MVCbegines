@@ -40,4 +40,14 @@ public class ReviewService {
         repository.save(review);
         return review;
     }
+
+    public Review updateReview(Long id, Review reviewDetails){
+        Review review = repository.findById(id).orElseThrow(() ->
+                new ReviewNotFoundException("There is no review with this id " + id));
+        review.setAuthorName(reviewDetails.getAuthorName());
+        review.setContent(reviewDetails.getContent());
+        review.setRating(reviewDetails.getRating());
+        repository.save(review);
+        return review;
+    }
 }
