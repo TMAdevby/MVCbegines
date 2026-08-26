@@ -56,4 +56,17 @@ public class ReviewService {
                 new ReviewNotFoundException("There is no review with this id " + id));
         repository.deleteById(id);
     }
+
+    public Double getAverageRating(Long productId){
+        List<Review> list = repository.findAllByProductId(productId);
+        if(list.isEmpty()){
+            return 0.0;
+        }
+        int ratingSum = 0;
+        for(Review review : list){
+            ratingSum += review.getRating();
+        }
+        double avRating = ratingSum / list.size();
+        return avRating;
+    }
 }
