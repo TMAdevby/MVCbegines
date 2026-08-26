@@ -69,6 +69,17 @@ public class ReviewRepository {
         return listReview;
     }
 
+    public Review save(Review review){
+        if(review.getId() == 0 || review.getId().equals(null)){
+            review.setId(idCounter.get());
+            getNextId();
+        }
+        rewievMap.put(review.getId(),review);
+        return review;
+    }
+
+    void deleteById(Long id)
+
 
 
 }
