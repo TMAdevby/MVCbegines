@@ -78,7 +78,9 @@ public class ReviewRepository {
         return review;
     }
 
-    void deleteById(Long id)
+    public void deleteById(Long id){
+
+    }
 
 
 
