@@ -50,4 +50,10 @@ public class ReviewService {
         repository.save(review);
         return review;
     }
+
+    public void deleteReview(Long id){
+        repository.findById(id).orElseThrow(() ->
+                new ReviewNotFoundException("There is no review with this id " + id));
+        repository.deleteById(id);
+    }
 }
