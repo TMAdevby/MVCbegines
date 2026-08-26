@@ -17,23 +17,23 @@ public class ReviewService {
         this.repository = repository;
     }
 
-    public List<Review> getAllReviews(){
+    public List<Review> getAllReviews() {
         List<Review> reviewList = repository.findAll();
         return reviewList;
     }
 
-    public List<Review> getReviewsByProductId(Long productId){
+    public List<Review> getReviewsByProductId(Long productId) {
         List<Review> reviewListByProductId = repository.findAllByProductId(productId);
         return reviewListByProductId;
     }
 
-    public Review getReviewById(Long id){
+    public Review getReviewById(Long id) {
         return repository.findById(id).orElseThrow(() ->
                 new ReviewNotFoundException("There is no review with this id " + id));
     }
 
-    public Review createReview(Review review){
-        if(review.getRating() < 1 || review.getRating() > 5){
+    public Review createReview(Review review) {
+        if (review.getRating() < 1 || review.getRating() > 5) {
             throw new IllegalArgumentException("Rating can not be less then 1 and bigger then 5");
         }
         review.setCreatedAt(LocalDateTime.now());
@@ -41,7 +41,10 @@ public class ReviewService {
         return review;
     }
 
-    public Review updateReview(Long id, Review reviewDetails){
+    public Review updateReview(Long id, Review reviewDetails) {
+        if (reviewDetails.getRating() < 1 || reviewDetails.getRating() > 5) {
+            throw new IllegalArgumentException("Rating can not be less than 1 and bigger than 5");
+        }
         Review review = repository.findById(id).orElseThrow(() ->
                 new ReviewNotFoundException("There is no review with this id " + id));
         review.setAuthorName(reviewDetails.getAuthorName());
@@ -51,22 +54,22 @@ public class ReviewService {
         return review;
     }
 
-    public void deleteReview(Long id){
+    public void deleteReview(Long id) {
         repository.findById(id).orElseThrow(() ->
                 new ReviewNotFoundException("There is no review with this id " + id));
         repository.deleteById(id);
     }
 
-    public Double getAverageRating(Long productId){
+    public Double getAverageRating(Long productId) {
         List<Review> list = repository.findAllByProductId(productId);
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return 0.0;
         }
         int ratingSum = 0;
-        for(Review review : list){
+        for (Review review : list) {
             ratingSum += review.getRating();
         }
-        double avRating = ratingSum / list.size();
+        double avRating = (double) ratingSum / list.size();
         return avRating;
     }
 }
