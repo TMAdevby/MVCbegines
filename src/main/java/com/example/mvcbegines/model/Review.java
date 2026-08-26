@@ -1,4 +1,5 @@
 package com.example.mvcbegines.model;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 

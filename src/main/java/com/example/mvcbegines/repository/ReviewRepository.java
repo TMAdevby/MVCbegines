@@ -46,30 +46,31 @@ public class ReviewRepository {
         review5.setCreatedAt(LocalDateTime.now().minusDays(1));
         rewievMap.put(5L, review5);
     }
+
     // Получение следующего ID для новых отзывов
     public long getNextId() {
         return idCounter.getAndIncrement();
     }
 
-    public List<Review> findAll(){
-        return  new ArrayList<Review> (rewievMap.values());
+    public List<Review> findAll() {
+        return new ArrayList<Review>(rewievMap.values());
     }
 
-    public Optional<Review> findById(Long id){
+    public Optional<Review> findById(Long id) {
         return Optional.ofNullable(rewievMap.get(id));
     }
 
-    public List<Review> findAllByProductId(Long productId){
+    public List<Review> findAllByProductId(Long productId) {
         ArrayList<Review> listReview = new ArrayList<>();
-        for(Map.Entry<Long,Review> item : rewievMap.entrySet()){
-            if(item.getValue().getProductId().equals(productId)){
+        for (Map.Entry<Long, Review> item : rewievMap.entrySet()) {
+            if (item.getValue().getProductId().equals(productId)) {
                 listReview.add(item.getValue());
             }
         }
         return listReview;
     }
 
-    public Review save(Review review){
+    public Review save(Review review) {
         if (review.getId() == null || review.getId() == 0L) {
             review.setId(idCounter.getAndIncrement());
         }
@@ -77,11 +78,7 @@ public class ReviewRepository {
         return review;
     }
 
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         rewievMap.remove(id);
     }
-
-
-
-
 }
