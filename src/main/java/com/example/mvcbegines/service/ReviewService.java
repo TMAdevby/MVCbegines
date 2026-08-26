@@ -1,8 +1,10 @@
 package com.example.mvcbegines.service;
 
+import com.example.mvcbegines.exception.ReviewNotFoundException;
 import com.example.mvcbegines.model.Review;
 import com.example.mvcbegines.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 
@@ -22,5 +24,10 @@ public class ReviewService {
     public List<Review> getReviewsByProductId(Long productId){
         List<Review> reviewListByProductId = repository.findAllByProductId(productId);
         return reviewListByProductId;
+    }
+
+    public Review getReviewById(Long id){
+        return repository.findById(id).orElseThrow(() ->
+                new ReviewNotFoundException("There is no review with this id " + id));
     }
 }
