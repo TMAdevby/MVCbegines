@@ -70,17 +70,17 @@ public class ReviewRepository {
     }
 
     public Review save(Review review){
-        if(review.getId() == 0 || review.getId().equals(null)){
-            review.setId(idCounter.get());
-            getNextId();
+        if (review.getId() == null || review.getId() == 0L) {
+            review.setId(idCounter.getAndIncrement());
         }
-        rewievMap.put(review.getId(),review);
+        rewievMap.put(review.getId(), review);
         return review;
     }
 
     public void deleteById(Long id){
-
+        rewievMap.remove(id);
     }
+
 
 
 
