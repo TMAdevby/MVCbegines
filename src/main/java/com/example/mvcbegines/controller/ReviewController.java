@@ -2,6 +2,7 @@ package com.example.mvcbegines.controller;
 
 import com.example.mvcbegines.model.Review;
 import com.example.mvcbegines.service.ReviewService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,12 +38,12 @@ public class ReviewController {
     }
 
     @PostMapping()
-    public Review createReview(@RequestBody Review review) {
+    public Review createReview(@Valid @RequestBody Review review) {
         return service.createReview(review);
     }
 
     @PutMapping("/{id}")
-    public Review updateReview(@PathVariable Long id, @RequestBody Review reviewDetails) {
+    public Review updateReview(@PathVariable Long id,@Valid @RequestBody Review reviewDetails) {
         return service.updateReview(id, reviewDetails);
     }
 
