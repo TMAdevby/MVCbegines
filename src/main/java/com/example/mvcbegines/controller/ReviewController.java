@@ -17,36 +17,36 @@ public class ReviewController {
     }
 
     @GetMapping
-    public List<Review> getAllReviews(){
+    public List<Review> getAllReviews() {
         return service.getAllReviews();
     }
 
     @GetMapping("/{id}")
-    public Review getReviewsById(@PathVariable long id){
+    public Review getReviewsById(@PathVariable long id) {
         return service.getReviewById(id);
     }
 
-    @GetMapping("/api/reviews/product/{productId}")
+    @GetMapping("/product/{productId}")
     public List<Review> getReviewsByProductId(@PathVariable Long productId) {
         return service.getReviewsByProductId(productId);
     }
 
-    @GetMapping("/api/reviews/product/{productId}/average-rating")
-    public Double getAverageRating(@PathVariable Long productId){
+    @GetMapping("/product/{productId}/average-rating")
+    public Double getAverageRating(@PathVariable Long productId) {
         return service.getAverageRating(productId);
     }
 
-    @PostMapping("/api/reviews")
+    @PostMapping()
     public Review createReview(@RequestBody Review review) {
         return service.createReview(review);
     }
 
-    @PutMapping("/api/reviews/{id}")
-    public Review updateReview(@PathVariable Long id,@RequestBody Review reviewDetails) {
-        return service.updateReview(id,reviewDetails);
+    @PutMapping("/{id}")
+    public Review updateReview(@PathVariable Long id, @RequestBody Review reviewDetails) {
+        return service.updateReview(id, reviewDetails);
     }
 
-    @DeleteMapping("/api/reviews/{id}")
+    @DeleteMapping("/{id}")
     public void deleteReview(@PathVariable Long id) {
         service.deleteReview(id);
     }
