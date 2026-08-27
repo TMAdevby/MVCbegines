@@ -45,4 +45,9 @@ public class ReviewController {
     public Review updateReview(@PathVariable Long id,@RequestBody Review reviewDetails) {
         return service.updateReview(id,reviewDetails);
     }
+
+    @DeleteMapping("/api/reviews/{id}")
+    public void deleteReview(@PathVariable Long id) {
+        service.deleteReview(id);
+    }
 }
