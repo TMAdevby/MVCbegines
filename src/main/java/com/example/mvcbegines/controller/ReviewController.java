@@ -3,10 +3,7 @@ package com.example.mvcbegines.controller;
 import com.example.mvcbegines.model.Review;
 import com.example.mvcbegines.service.ReviewService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +29,15 @@ public class ReviewController {
     @GetMapping("/api/reviews/product/{productId}")
     public List<Review> getReviewsByProductId(@PathVariable Long productId) {
         return service.getReviewsByProductId(productId);
+    }
+
+    @GetMapping("/api/reviews/product/{productId}/average-rating")
+    public Double getAverageRating(@PathVariable Long productId){
+        return service.getAverageRating(productId);
+    }
+
+    @PostMapping("/api/reviews")
+    public Review createReview(@RequestBody Review review) {
+        return service.createReview(review);
     }
 }
