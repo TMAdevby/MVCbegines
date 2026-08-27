@@ -40,4 +40,9 @@ public class ReviewController {
     public Review createReview(@RequestBody Review review) {
         return service.createReview(review);
     }
+
+    @PutMapping("/api/reviews/{id}")
+    public Review updateReview(@PathVariable Long id,@RequestBody Review reviewDetails) {
+        return service.updateReview(id,reviewDetails);
+    }
 }
